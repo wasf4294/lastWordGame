@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div><span id="order">1</span>번째 참가자</div>
+    <div>제시어: <span id="word"></span></div>
+    <input type="text">
+    <button>입력</button>
+    <script>
+
+        // const number =  prompt('몇 명이 참가하나요?');
+        // const realNumber = Number(number); //const number = Number(prompt('몇 명이 참가하나요?'));
+
+
+        const $span = document.querySelector('div span');
+
+
+        /*
+        document.querySelector('button').addEventListener('click', () => {
+            console.log('버튼 클릭');
+        };)
+        
+            */
+
+            /* 버튼 이벤트 */
+        // const $button = document.querySelector('button');
+        // const onClickButton = function(){
+        //     console.log('버튼 클릭');
+        // };
+        // $button.addEventListener('click', onClickButton);
+
+            /* input 이벤트 */
+        // const $input = document.querySelector('input');
+        // const onInput = function(){
+        //     //event의 메서드 target의 메서드 vlue = 값을 알아낼 수 있다.
+        //     console.log('글자 입력', event.target.value);
+        // };
+
+        /* 함수의 매개변수가 정의 되어있지 않을 땐 event로 메서드를 실행시키고, 이름을 따로 넣어줘도 된다.
+            const onInput = function(매개변수 이름){
+            //event의 메서드 target의 메서드 vlue = 값을 알아낼 수 있다.
+            console.log('글자 입력', 매개변수 이름.target.value);
+        };
+        */
+        // $input.addEventListener('input',onInput);
+/*-------------------- 정리 -------------------------*/
+    const number =  prompt('몇 명이 참가하나요?');//prompt 에서는 다 문자열
+    const realNumber = Number(number); //숫자로 변환
+    const $button = document.querySelector('button');
+    const $input = document.querySelector('input');
+    const $word = document.querySelector('#word');
+    const $order = document.querySelector('#order'); //
+    let word; //제시어
+    let newWord; //현재 단어
+    
+
+    //click이벤트의 매서드
+    const onClickButton = function(){
+        if(!word){//word가 false 인가? word가 비었는가?
+            word = newWord;
+            $word.textContent = word; // 화면에 제시어를 표시 textContent =  제시어 표시
+            const order = Number($order.textContent); //order의 입력된 textContent는 1 이를 Number로 바꿔줌 그리고 이를 보여줌
+
+
+            /*---------순서 정하기---------*/
+            if(order + 1 > number){
+                $order.textContent = 1;
+            } else {
+                $order.textContent = order + 1;
+            } 
+            /*-----------------------------*/
+
+
+        }
+        else{//word가 안비었다.
+            //진위 여부 파악
+            if(word[word.length -1] === newWord[0]){ //첫번째 단어의 0번 word의마지막 값 비교
+                //같다.
+                word = newWord;
+                $word.textContent = word;
+
+                /*---------순서 정하기---------*/       
+                const order = Number($order.textContent);
+                if(order + 1 > number){
+                    $order.textContent = 1;
+                }else{
+                    $order.textContent = order + 1;
+                }
+                /*-----------------------------*/
+
+            } else {//다르다.
+                alert('올바르지 않은 단어입니다.');
+            }
+        }
+        };
+
+        const onInput = function(){
+            console.log('글자 입력', event.target.value);
+            newWord = event.target.value; //입력한 단어를 현재 단어로.
+        };
+
+
+        /*
+        1. 몇 명 참여? - 수를 입력 - 입력된 수는 promp()라 Number를 이용해 숫자로 변경.
+
+        2. input 창에 입력된 문자열을 변수명 newWord을 가진 변수에 넣음.(이벤트의 종류는 다양함 그중 input 이벤트를 사용하고 변수명 onInput 변수안의 함수 즉 메서드 onInput을 사용.)
+
+        3. 그리고 버튼에 클릭이벤트를 만들고 클릭시 실행될 메서드를 가진 변수를 매개변수로 넣음. 
+            - 매개변수명 : onClickButton 이지만 안의 함수는 익명함수이기에 바로 실행 
+            - 실행 : 변수 word가 비었다면 제시어가됨 순서는 HTML order라는 이름을 가진 id를 가져온 $order의 값은 '1' 이는 문자여서 수로 변환함 
+            변환된 값은 order에 저장되고 참여인원이 저장된 변수 number와 비교함
+            order + 1이 number 보다 크면 1번째가 되고 작으면 +1 되어 순환이 됨.
+
+                    번수 word가 안비었다면 word마지막 값을 찾고 그값과 새로입력된 newWord 첫 값을 비교하여 같은지 여부를 파악 같으면 순서대로 진행됨.
+                    
+                    다르면 alert를 실행
+        */
+
+
+
+        $button.addEventListener('click', onClickButton);//버튼을 클릭하면 이벤트
+        $input.addEventListener('input',onInput);//입력하면 이벤트
+    </script>
+</body>
+</html>
