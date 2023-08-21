@@ -73,7 +73,8 @@
                 $order.textContent = order + 1;
             } 
             /*-----------------------------*/
-
+            $input.value = '';
+            $input.focus();
 
         }
         else{//word가 안비었다.
@@ -90,10 +91,16 @@
                 }else{
                     $order.textContent = order + 1;
                 }
+
                 /*-----------------------------*/
 
+                $input.value = '';
+                $input.focus();
+                
             } else {//다르다.
                 alert('올바르지 않은 단어입니다.');
+                $input.value = '';
+                $input.focus();
             }
         }
         };
@@ -115,9 +122,10 @@
             변환된 값은 order에 저장되고 참여인원이 저장된 변수 number와 비교함
             order + 1이 number 보다 크면 1번째가 되고 작으면 +1 되어 순환이 됨.
 
-                    번수 word가 안비었다면 word마지막 값을 찾고 그값과 새로입력된 newWord 첫 값을 비교하여 같은지 여부를 파악 같으면 순서대로 진행됨.
+                    변수 word가 안비었다면 word마지막 값을 찾고 그값과 새로입력된 newWord 첫 값을 비교하여 같은지 여부를 파악 같으면 순서대로 진행됨.
                     
                     다르면 alert를 실행
+
         */
 
 
